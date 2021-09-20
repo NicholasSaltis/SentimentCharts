@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/NicholasSaltis/SentimentCharts#readme",
   "dependencies": {
-    "axios": "^0.21.4",
-    "quickchart-js": "^1.4.2"
-  }
+    "axios": "^0.21.4"
+  },
+  "devDependencies": {}
 }
