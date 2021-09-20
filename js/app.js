@@ -31,7 +31,6 @@ document.getElementById('myChart'),
 config
 );
 
-
 function updateData(chart, size, newData) {
     chart.data.labels = [...Array(size).keys()];
     chart.data.datasets[0].data = newData;
