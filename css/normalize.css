@@ -353,3 +353,11 @@ td,
 th {
   padding: 0;
 }
+
+/* custom css */
+
+#chart-summary {
+  color: white;
+  text-align: center;
+  padding-top: 20px;
+}
