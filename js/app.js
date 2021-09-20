@@ -10,6 +10,11 @@ submitButton.addEventListener('click', (e) => {
     let answer = document.getElementById('answers').value;
     axios.post('https://sentim-api.herokuapp.com/api/v1/', JSON.stringify({ "text": answer }), {headers: headers})
     .then((response) => {
+        let sentences = response.data.sentences;
+        let sentenceScores = [];
+        for(let sentence of sentences){
+            sentenceScores.push(sentence.sentiment.polarity)
+        };
         let shrek = document.getElementById("shrek");
         rating = response.data.result.polarity;
         if (rating >= 0.75){
