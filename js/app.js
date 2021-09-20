@@ -3,6 +3,33 @@ const headers = {
     Accept: "application/json", 
     "Content-Type": "application/json"
   }
+  const labels = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+  ];
+  const data = {
+    labels: labels,
+    datasets: [{
+      label: 'Happiness',
+      backgroundColor: 'rgb(255, 99, 132)',
+      borderColor: 'rgb(255, 99, 132)',
+      data: [0, 10, 5, 2, 20, 30, 45],
+    }]
+  };
+  const config = {
+    type: 'line',
+    data: data,
+    options: {}
+  };
+
+var myChart = new Chart(
+document.getElementById('myChart'),
+config
+);
 let submitButton = document.getElementById('submit');
 
 submitButton.addEventListener('click', (e) => {
