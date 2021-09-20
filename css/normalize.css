@@ -357,7 +357,26 @@ th {
 /* custom css */
 
 #chart-summary {
-  color: white;
+  color: rgb(209, 209, 209);
   text-align: center;
   padding-top: 20px;
+}
+
+#sitename {
+  font-size: 30px;
+}
+
+#instructions {
+  color: rgb(161, 161, 161);
+  font-size: 15px;
+  margin-top: 5px;
+}
+
+#submit {
+  font-size: 15px;
+  border-radius: 2px;
+}
+
+#answers {
+  width: 75%;
 }
