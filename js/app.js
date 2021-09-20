@@ -8,11 +8,10 @@ let submitButton = document.getElementById('submit');
 submitButton.addEventListener('click', (e) => {
     e.preventDefault();
     let answer = document.getElementById('answers').value;
-    axios.post('https://sentim-api.herokuapp.com/api/v1/', { "text": answer }, {headers: headers})
+    axios.post('https://sentim-api.herokuapp.com/api/v1/', JSON.stringify({ "text": answer }), {headers: headers})
     .then((response) => {
         let shrek = document.getElementById("shrek");
         rating = response.data.result.polarity;
-        console.log(typeof rating);
         if (rating >= 0.75){
                 shrek.style.backgroundImage = "url('../images/shrekvhappy.jpeg')";
         }else if(rating >= 0.5)
