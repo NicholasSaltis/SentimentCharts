@@ -26,18 +26,59 @@ const headers = {
     options: {}
   };
 
+  var comments = ["You did great", "Meh", "Great start but poor finish", "Poor start but better finish", "Worst conversation ever"]
+
 var myChart = new Chart(
 document.getElementById('myChart'),
 config
 );
 
-var averages = [0, 0, 0];
+var averages = [0, 0];
 var sum = 0;
+var rating = 0;
 
 function updateData(chart, size, newData) {
     chart.data.labels = [...Array(size).keys()];
     chart.data.datasets[0].data = newData;
     chart.update();
+}
+
+function updateSentence(count) {
+    if (count == 1)
+    {
+        if (rating > 0.5)
+        {
+            changeSentence(0);
+        }else if(rating > -0.1 && rating < 0.1)
+        {
+            changeSentence(1);
+        }else{
+            changeSentence(4);
+        }
+    }else{
+        if (averages[0] > 0.25)
+        {
+            if(averages[1] > averages[0])
+            {
+                changeSentence(0);
+            }else{
+                changeSentence(2);
+            }
+        }else{
+            if(averages[1] > averages[0])
+            {
+                changeSentence(3);
+            }else{
+                changeSentence(4);
+            }
+        }
+    }
+}
+
+function changeSentence(commentNum){
+    sentence = comments[commentNum];
+    let text = document.getElementById('chart-summary');
+    text.innerHTML = sentence;
 }
 
 let submitButton = document.getElementById('submit');
@@ -80,35 +121,47 @@ submitButton.addEventListener('click', (e) => {
         for(let sentence of sentences){
             sentenceScores.push(sentence.sentiment.polarity * 100)
         };
-
-        if(sentenceScores.length % 3 == 0)
-        {
-            let third = sentenceScores.length / 3;
-            sum = 0;
-            for(i = 0; i < third; i ++)
-            {
-                sum += sentenceScores[i];
-            }
-            averages[0] = sum / third;
-            sum = 0;
-            for(i = third-1; i < third*2; i ++)
-            {
-                sum += sentenceScores[i];
-            }
-            averages[1] = sum / third;
-            sum = 0;
-            for(i = (third*2)-1; i < sentenceScores.length-1; i ++)
-            {
-                sum += sentenceScores[i];
-            }
-            averages[2] = sum / third;
-        }else if(sentenceScores.length % 2 == 0)
-        {
-            
-        }else{
-            
-        }
+        sum = 0;
         updateData(myChart, sentenceScores.length + 1, sentenceScores);
+        if(sentenceScores.length % 2 == 0)
+        {
+            let half = sentenceScores.length / 2;
+
+            for(i = 0; i < half; i ++)
+            {
+                sum += sentenceScores[i];
+            }
+            averages[0] = sum / half;
+            sum = 0;
+            for(i = half-1; i < sentenceScores.length-1; i ++)
+            {
+                sum += sentenceScores[i];
+            }
+            averages[1] = sum / half;
+            updateSentence(2);
+            
+        }else if(sentenceScores.length == 1){
+            averages[0] = sentenceScores[0];
+            updateSentence(1);
+        }else{
+            sentenceScores.splice(sentenceScores.length/2, 1);
+            let half = sentenceScores.length / 2;
+            sum = 0;
+            for(i = 0; i < half; i ++)
+            {
+                sum += sentenceScores[i];
+            }
+            averages[0] = sum / half;
+            sum = 0;
+            for(i = half-1; i < sentenceScores.length-1; i ++)
+            {
+                sum += sentenceScores[i];
+            }
+            averages[1] = sum / half;
+            sum = 0;
+            updateSentence(2);
+        }
+
     })
     .catch((error) => {
 
