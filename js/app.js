@@ -1,3 +1,4 @@
+// const { Chart } = require("chart.js");
 
 const headers = {
     Accept: "application/json", 
@@ -20,13 +21,28 @@ const headers = {
       data: [],
     }]
   };
-  var config = {
+// event handler for graph button select. reads value of selected option in select tag.
+// destroys the existing chart and replaces it with a new chart with the selected chart type.
+function GetSelectedText(){
+    var e = document.getElementById("graphType");
+    console.log(e.options[e.selectedIndex].text);
+    graphType = e.options[e.selectedIndex].text
+    myChart.destroy();
+    myChart = new Chart(document.getElementById('myChart'), {type: graphType, data: data});
+};
+// event listener for graph type submit button
+document.getElementById("graphButton").addEventListener('click', ()=>{
+    console.log('working')
+    GetSelectedText()
+})
+
+var config = {
     type: 'line',
     data: data,
     options: {}
-  };
+};
 
-  var comments = ["You did great", "Meh", "Great start but poor finish", "Poor start but better finish", "Worst conversation ever"]
+var comments = ["You did great", "Meh", "Great start but poor finish", "Poor start but better finish", "Worst conversation ever"]
 
 var myChart = new Chart(
 document.getElementById('myChart'),

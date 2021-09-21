@@ -380,3 +380,7 @@ th {
 #answers {
   width: 75%;
 }
+
+label {
+  color: rgb(161, 161, 161);
+}
