@@ -31,6 +31,9 @@ document.getElementById('myChart'),
 config
 );
 
+var averages = [0, 0, 0];
+var sum = 0;
+
 function updateData(chart, size, newData) {
     chart.data.labels = [...Array(size).keys()];
     chart.data.datasets[0].data = newData;
@@ -71,14 +74,40 @@ submitButton.addEventListener('click', (e) => {
         {
             shrek.style.backgroundImage = "url('../images/shrekswamp.jpeg')";
         }
-        alert(rating);
-        console.log(response.data.result);
+
         let sentences = response.data.sentences;
         let sentenceScores = [];
         for(let sentence of sentences){
             sentenceScores.push(sentence.sentiment.polarity * 100)
         };
-        console.log(sentenceScores);
+
+        if(sentenceScores.length % 3 == 0)
+        {
+            let third = sentenceScores.length / 3;
+            sum = 0;
+            for(i = 0; i < third; i ++)
+            {
+                sum += sentenceScores[i];
+            }
+            averages[0] = sum / third;
+            sum = 0;
+            for(i = third-1; i < third*2; i ++)
+            {
+                sum += sentenceScores[i];
+            }
+            averages[1] = sum / third;
+            sum = 0;
+            for(i = (third*2)-1; i < sentenceScores.length-1; i ++)
+            {
+                sum += sentenceScores[i];
+            }
+            averages[2] = sum / third;
+        }else if(sentenceScores.length % 2 == 0)
+        {
+
+        }else{
+
+        }
         updateData(myChart, sentenceScores.length + 1, sentenceScores);
     })
     .catch((error) => {
