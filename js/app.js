@@ -34,7 +34,6 @@ config
 var averages = [0, 0, 0];
 var sum = 0;
 
-
 function updateData(chart, size, newData) {
     chart.data.labels = [...Array(size).keys()];
     chart.data.datasets[0].data = newData;
