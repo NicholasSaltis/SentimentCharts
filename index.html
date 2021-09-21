@@ -47,21 +47,21 @@ body {
         <h1 class="credit" id="instructions">Please separate each sentence with a full stop.</a></h1>
         </div>
         <div>
-          <!-- graph type change form -->
-            <label for="graphType">Choose a graph type:</label>
-            <select name="graphType" id="graphType">
-              <option value="line">line</option>
-              <option value="bar">bar</option>
-            </select>
-            <br><br>
-            <!-- event handler on this button retrieves selected value from above option tags -->
-            <input type="submit" value="Submit" id="graphButton">
-          
           <canvas id="myChart">
           </canvas>
           <div>
             <p id="chart-summary"></p>
           </div>
+                    <!-- graph type change form -->
+                    <label for="graphType">Choose a graph type:</label>
+                    <select name="graphType" id="graphType">
+                      <option value="line">line</option>
+                      <option value="bar">bar</option>
+                    </select>
+                    <br><br>
+                    <!-- event handler on this button retrieves selected value from above option tags -->
+                    <input type="submit" value="Change Graph" id="graphButton">
+                  
         </div>
       </div>
       
