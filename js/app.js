@@ -104,9 +104,9 @@ submitButton.addEventListener('click', (e) => {
             averages[2] = sum / third;
         }else if(sentenceScores.length % 2 == 0)
         {
-
+            
         }else{
-
+            
         }
         updateData(myChart, sentenceScores.length + 1, sentenceScores);
     })
